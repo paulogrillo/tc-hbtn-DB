@@ -1,21 +1,19 @@
 package entities;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
+@Entity
 public class Telefone {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "telefone_id")
+    @Column
     private Long id;
 
-    @Column(name = "DDD")
+    @Column
     private String DDD;
 
-    @Column(name = "numero")
+    @Column
     private String numero;
 
     public Telefone(){}
@@ -42,5 +40,14 @@ public class Telefone {
 
     public void setNumero(String numero) {
         this.numero = numero;
+    }
+
+    @Override
+    public String toString() {
+        return "Telefone{" +
+                "id=" + id +
+                ", DDD='" + DDD + '\'' +
+                ", numero='" + numero + '\'' +
+                '}';
     }
 }

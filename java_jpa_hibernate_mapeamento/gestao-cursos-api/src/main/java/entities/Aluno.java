@@ -1,33 +1,47 @@
 package entities;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.Calendar;
+import java.util.List;
 
+@Entity
 public class Aluno {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "aluno_id")
+    @Column
     private Long id;
 
-    @Column(name = "nomeCompleto")
+    @Column
     private String nomeCompleto;
 
-    @Column(name = "matricula")
+    @Column
     private String matricula;
 
-    @Column(name = "nascimento")
-    private Calendar nascimento;
+    @Column
+    private LocalDate nascimento;
 
-    @Column(name = "email")
+    @Column
     private String email;
 
+    @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE})
+    @JoinColumn(name = "id_telefone", referencedColumnName = "id", foreignKey = @ForeignKey(name = "fk_telefone"))
+    private List<Telefone> telefones;
 
+    @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE})
+    @JoinColumn(name = "endereco_id", referencedColumnName = "id")
+    private List<Endereco> enderecos;
 
     public Aluno(){}
+
+
+    public List<Endereco> getEnderecos() {
+        return enderecos;
+    }
+    public void setEnderecos(List<Endereco> enderecos) {
+        this.enderecos = enderecos;
+    }
 
     public Long getId() {
         return id;
@@ -53,11 +67,11 @@ public class Aluno {
         this.matricula = matricula;
     }
 
-    public Calendar getNascimento() {
+    public LocalDate getNascimento() {
         return nascimento;
     }
 
-    public void setNascimento(Calendar nascimento) {
+    public void setNascimento(LocalDate nascimento) {
         this.nascimento = nascimento;
     }
 
@@ -67,5 +81,26 @@ public class Aluno {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public List<Telefone> getTelefones() {
+        return telefones;
+    }
+
+    public void setTelefones(List<Telefone> telefones) {
+        this.telefones = telefones;
+    }
+
+    @Override
+    public String toString() {
+        return "Aluno{" +
+                "id=" + id +
+                ", nomeCompleto='" + nomeCompleto + '\'' +
+                ", matricula='" + matricula + '\'' +
+                ", nascimento=" + nascimento +
+                ", email='" + email + '\'' +
+                ", telefones=" + telefones +
+                ", enderecos=" + enderecos +
+                '}';
     }
 }

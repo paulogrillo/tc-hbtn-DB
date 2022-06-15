@@ -1,39 +1,27 @@
 package entities;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
+@Entity
 public class Endereco {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "endereco_id")
     private Long id;
-
-    @Column(name = "logradouro")
+    @Column
     private String logradouro;
-
-    @Column(name = "endereco")
+    @Column
     private String endereco;
-
-    @Column(name = "numero")
+    @Column
     private String numero;
-
-    @Column(name = "bairro")
+    @Column
     private String bairro;
-
-    @Column(name = "cidade")
+    @Column
     private String cidade;
-
-    @Column(name = "estado")
+    @Column
     private String estado;
-
-    @Column(name = "cep")
+    @Column
     private Integer cep;
-
-    public Endereco(){}
 
     public Long getId() {
         return id;
@@ -97,5 +85,10 @@ public class Endereco {
 
     public void setCep(Integer cep) {
         this.cep = cep;
+    }
+
+    @Override
+    public String toString(){
+        return this.id + " - " + this.logradouro + " - " + this.endereco + " - " + this.numero + " - " + this.bairro + " - " + this.cidade + " - " + this.estado + " - " + this.cep;
     }
 }

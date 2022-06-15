@@ -1,18 +1,16 @@
 package entities;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
+@Entity
 public class MaterialCurso {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "material_curso_id")
+    @Column
     private Long id;
 
-    @Column(name = "url")
+    @Column
     private String url;
 
     public MaterialCurso(){}
@@ -31,5 +29,13 @@ public class MaterialCurso {
 
     public void setUrl(String url) {
         this.url = url;
+    }
+
+    @Override
+    public String toString() {
+        return "MaterialCurso{" +
+                "id=" + id +
+                ", url='" + url + '\'' +
+                '}';
     }
 }

@@ -3,26 +3,22 @@ package entities;
 import javax.persistence.*;
 import java.util.List;
 
+@Entity
 public class Professor {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "professor_id")
+    @Column
     private Long id;
 
-    @Column(name = "nomeCompleto")
+    @Column
     private String nomeCompleto;
 
-    @Column(name = "nomeCompleto")
+    @Column
     private String matricula;
 
-    @Column(name = "nomeCompleto")
+    @Column
     private String email;
-
-    @OneToMany(mappedBy = "professor", fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_curso", foreignKey = @ForeignKey(name = "fk_curso"))
-    private List<Curso> cursos;
-
 
 
     public Professor(){}
@@ -57,5 +53,15 @@ public class Professor {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    @Override
+    public String toString() {
+        return "Professor{" +
+                "id=" + id +
+                ", nomeCompleto='" + nomeCompleto + '\'' +
+                ", matricula='" + matricula + '\'' +
+                ", email='" + email + '\'' +
+                '}';
     }
 }
