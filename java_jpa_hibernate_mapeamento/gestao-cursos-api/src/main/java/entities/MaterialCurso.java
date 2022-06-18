@@ -7,13 +7,9 @@ public class MaterialCurso {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column
     private Long id;
-
     @Column
     private String url;
-
-    public MaterialCurso(){}
 
     public Long getId() {
         return id;
@@ -32,10 +28,7 @@ public class MaterialCurso {
     }
 
     @Override
-    public String toString() {
-        return "MaterialCurso{" +
-                "id=" + id +
-                ", url='" + url + '\'' +
-                '}';
+    public String toString(){
+        return this.id + " - " + this.url;
     }
 }

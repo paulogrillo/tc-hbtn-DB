@@ -2,7 +2,6 @@ package entities;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.Calendar;
 import java.util.List;
 
 @Entity
@@ -10,38 +9,21 @@ public class Aluno {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column
     private Long id;
-
     @Column
     private String nomeCompleto;
-
     @Column
     private String matricula;
-
     @Column
     private LocalDate nascimento;
-
     @Column
     private String email;
-
     @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE})
-    @JoinColumn(name = "id_telefone", referencedColumnName = "id", foreignKey = @ForeignKey(name = "fk_telefone"))
+    @JoinColumn(name = "telefone_id", referencedColumnName = "id")
     private List<Telefone> telefones;
-
     @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE})
     @JoinColumn(name = "endereco_id", referencedColumnName = "id")
     private List<Endereco> enderecos;
-
-    public Aluno(){}
-
-
-    public List<Endereco> getEnderecos() {
-        return enderecos;
-    }
-    public void setEnderecos(List<Endereco> enderecos) {
-        this.enderecos = enderecos;
-    }
 
     public Long getId() {
         return id;
@@ -91,16 +73,17 @@ public class Aluno {
         this.telefones = telefones;
     }
 
-    @Override
-    public String toString() {
-        return "Aluno{" +
-                "id=" + id +
-                ", nomeCompleto='" + nomeCompleto + '\'' +
-                ", matricula='" + matricula + '\'' +
-                ", nascimento=" + nascimento +
-                ", email='" + email + '\'' +
-                ", telefones=" + telefones +
-                ", enderecos=" + enderecos +
-                '}';
+    public List<Endereco> getEnderecos() {
+        return enderecos;
     }
+
+    public void setEnderecos(List<Endereco> enderecos) {
+        this.enderecos = enderecos;
+    }
+
+    @Override
+    public String toString(){
+        return this.id + " - " + this.nomeCompleto + " - " + this.matricula + " - " + this.nascimento + " - " + this.email + " - " + this.telefones + " - " + this.enderecos + "\n";
+    }
+
 }

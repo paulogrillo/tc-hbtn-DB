@@ -1,27 +1,19 @@
 package entities;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
 public class Professor {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column
     private Long id;
-
     @Column
     private String nomeCompleto;
-
     @Column
     private String matricula;
-
     @Column
     private String email;
-
-
-    public Professor(){}
 
     public Long getId() {
         return id;
@@ -56,12 +48,7 @@ public class Professor {
     }
 
     @Override
-    public String toString() {
-        return "Professor{" +
-                "id=" + id +
-                ", nomeCompleto='" + nomeCompleto + '\'' +
-                ", matricula='" + matricula + '\'' +
-                ", email='" + email + '\'' +
-                '}';
+    public String toString(){
+        return this.id +  " - " + this.nomeCompleto + " - " + this.matricula + " - " + this.email;
     }
 }

@@ -7,16 +7,11 @@ public class Telefone {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column
     private Long id;
-
     @Column
-    private String DDD;
-
+    private String ddd;
     @Column
     private String numero;
-
-    public Telefone(){}
 
     public Long getId() {
         return id;
@@ -26,12 +21,12 @@ public class Telefone {
         this.id = id;
     }
 
-    public String getDDD() {
-        return DDD;
+    public String getDdd() {
+        return ddd;
     }
 
-    public void setDDD(String DDD) {
-        this.DDD = DDD;
+    public void setDdd(String ddd) {
+        this.ddd = ddd;
     }
 
     public String getNumero() {
@@ -43,11 +38,7 @@ public class Telefone {
     }
 
     @Override
-    public String toString() {
-        return "Telefone{" +
-                "id=" + id +
-                ", DDD='" + DDD + '\'' +
-                ", numero='" + numero + '\'' +
-                '}';
+    public String toString(){
+        return this.id + " - " + "(" + this.ddd + ")" + " " + this.numero;
     }
 }

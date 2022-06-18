@@ -3,25 +3,22 @@ package entities;
 import javax.persistence.*;
 import java.util.List;
 
-
 @Entity
 public class Curso {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column
     private Long id;
-
     @Column
     private String nome;
-
     @Column
     private String sigla;
-
-/*    @ManyToOne
+    @ManyToOne(optional = false, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinColumn(name = "professor_id", referencedColumnName = "id")
-    private Professor professor;*/
-
+    private Professor professor;
+    @OneToOne(optional = false, cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE})
+    @JoinColumn(name = "materialCurso_id", referencedColumnName = "id")
+    private MaterialCurso materialCurso;
     @ManyToMany
     @JoinTable(
             name = "aluno_curso",
@@ -29,40 +26,6 @@ public class Curso {
             inverseJoinColumns = @JoinColumn(name = "aluno_id", referencedColumnName = "ID")
     )
     private List<Aluno> alunos;
-
-    @OneToOne(optional = false, cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE})
-    @JoinColumn(name = "id_materialCurso", referencedColumnName = "id", foreignKey = @ForeignKey(name = "fk_materialCurso"))
-    private MaterialCurso materialCurso;
-
-    @ManyToOne(optional = false, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    @JoinColumn(name = "id_professor", referencedColumnName = "id", foreignKey = @ForeignKey(name = "fk_professor"))
-    private Professor professor;
-
-    public Curso(){}
-
-    public List<Aluno> getAlunos() {
-        return alunos;
-    }
-
-    public void setAlunos(List<Aluno> alunos) {
-        this.alunos = alunos;
-    }
-
-    public Professor getProfessor() {
-        return professor;
-    }
-
-    public void setProfessor(Professor professor) {
-        this.professor = professor;
-    }
-
-    public MaterialCurso getMaterialCurso() {
-        return materialCurso;
-    }
-
-    public void setMaterialCurso(MaterialCurso materialCurso) {
-        this.materialCurso = materialCurso;
-    }
 
     public Long getId() {
         return id;
@@ -88,15 +51,32 @@ public class Curso {
         this.sigla = sigla;
     }
 
+    public Professor getProfessor() {
+        return professor;
+    }
+
+    public void setProfessor(Professor professor) {
+        this.professor = professor;
+    }
+
+    public MaterialCurso getMaterialCurso() {
+        return materialCurso;
+    }
+
+    public void setMaterialCurso(MaterialCurso materialCurso) {
+        this.materialCurso = materialCurso;
+    }
+
+    public List<Aluno> getAlunos() {
+        return alunos;
+    }
+
+    public void setAlunos(List<Aluno> alunos) {
+        this.alunos = alunos;
+    }
+
     @Override
-    public String toString() {
-        return "Curso{" +
-                "id=" + id +
-                ", nome='" + nome + '\'' +
-                ", sigla='" + sigla + '\'' +
-                ", alunos=" + alunos +
-                ", materialCurso=" + materialCurso +
-                ", professor=" + professor +
-                '}';
+    public String toString(){
+        return this.id + " - " + this.nome + " - " + this.sigla + " - " + "[" + this.professor + "]" + " - " + "[" + this.materialCurso + "]" + " - " + this.alunos;
     }
 }
